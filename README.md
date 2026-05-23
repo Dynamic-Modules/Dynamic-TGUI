@@ -4,11 +4,6 @@ Dynamic TGUI lets Dynamic SS13 Modules patch or replace tgstation-style `tgui/`
 source during the normal tgui build without committing generated tgui edits to
 the host repository.
 
-It is the module version of SPLURT's modular tgui overlay system. The one-time
-bulk migration tooling and generated SPLURT manifests are intentionally not part
-of the default workflow here; this repository is for giving other modules a
-stable build-time tgui overlay surface.
-
 ## Host Build Hook
 
 The host repo should run Dynamic SS13 Modules `prepare` before tgui builds. In
