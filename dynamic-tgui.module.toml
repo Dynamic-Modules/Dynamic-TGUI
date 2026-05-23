@@ -16,3 +16,9 @@ minimum_dynamic_modules = "0.2.0"
 dm_files = []
 test_files = []
 tgui = []
+
+[[prepare_plugins]]
+id = "dynamic-tgui-cli-wrapper"
+command = "bun"
+args = ["prepare_plugin.ts"]
+description = "Generates the host tgui package wrapper used by local builds, CI, and TGS."

@@ -10,7 +10,7 @@ The host repo should run Dynamic SS13 Modules `prepare` before tgui builds. In
 TGS this belongs in `tools/tgs_scripts/PreCompile.sh` before
 `tools/build/build.ts`; local builds should use the same prepare wrapper.
 
-When the `dynamic-tgui` module is installed, `dynamic-modules prepare` generates:
+When the `dynamic-tgui` module is installed, its prepare plugin generates:
 
 ```text
 .dynamic_modules_build/tgui/cli.ts
@@ -31,8 +31,10 @@ Point the host `tgui/package.json` scripts at that generated wrapper:
 ```
 
 The wrapper sets the host/index environment and dispatches to this module's
-Rspack config. If no modules declare tgui overlays, the plugin returns no extra
-Rspack plugins and the normal tgui build proceeds.
+Rspack config. The framework only runs the generic prepare plugin API here;
+Dynamic TGUI owns the wrapper path and generation details. If no modules
+declare tgui overlays, the Rspack plugin returns no extra patches and the
+normal tgui build proceeds.
 
 ## Module Manifests
 
