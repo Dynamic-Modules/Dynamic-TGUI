@@ -8,10 +8,10 @@ const [, , command, ...args] = Bun.argv;
 
 switch (command) {
 	case 'analyze':
-		run([rspackBin(), '--analyze', '--config', pathFromCli('../rspack.config.ts')]);
+		run(rspackCommand(['--analyze', '--config', pathFromCli('../rspack.config.ts')]));
 		break;
 	case 'build':
-		run([rspackBin(), 'build', '--config', pathFromCli('../rspack.config.ts')]);
+		run(rspackCommand(['build', '--config', pathFromCli('../rspack.config.ts')]));
 		break;
 	case 'compare':
 		runTool('../compare.ts', args);
@@ -68,8 +68,22 @@ function pathFromCli(relativePath: string) {
 	return fileURLToPath(new URL(relativePath, import.meta.url));
 }
 
+function rspackCommand(args: string[]) {
+	const rspack = rspackBin();
+	if (path.isAbsolute(rspack)) {
+		return ['bun', rspack, ...args];
+	}
+
+	return [rspack, ...args];
+}
+
 function rspackBin() {
 	const { tguiRoot } = getDynamicTguiPaths();
+	const cliScript = path.join(tguiRoot, 'node_modules', '@rspack', 'cli', 'bin', 'rspack.js');
+	if (fs.existsSync(cliScript)) {
+		return cliScript;
+	}
+
 	const binaryName = process.platform === 'win32' ? 'rspack.cmd' : 'rspack';
 	const localBin = path.join(tguiRoot, 'node_modules', '.bin', binaryName);
 
