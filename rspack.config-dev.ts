@@ -1,13 +1,12 @@
+import { createRequire } from 'node:module';
 import path from 'node:path';
-import { pathToFileURL } from 'node:url';
 
 import { getDynamicTguiPaths } from './paths';
 import { createModularTguiPlugins } from './plugin';
 
 const { tguiRoot } = getDynamicTguiPaths();
-const baseConfig = (await import(
-	pathToFileURL(path.join(tguiRoot, 'rspack.config-dev.ts')).href
-)).config;
+const require = createRequire(import.meta.url);
+const baseConfig = require(path.join(tguiRoot, 'rspack.config-dev.ts')).config;
 
 export const config = {
 	...baseConfig,
