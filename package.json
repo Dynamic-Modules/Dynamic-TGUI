@@ -1,0 +1,13 @@
+{
+	"name": "@dynamic-modules/dynamic-tgui",
+	"version": "1.0.0",
+	"private": true,
+	"license": "AGPL-3.0-or-later",
+	"description": "Dynamic TGUI overlay support for Dynamic SS13 Modules.",
+	"scripts": {
+		"test": "bun test"
+	},
+	"devDependencies": {
+		"typescript": "^5.8.3"
+	}
+}

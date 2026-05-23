@@ -117,3 +117,16 @@ bun ../.dynamic_modules_build/tgui/cli.ts generate-final \
 
 `generate-final` prints the source after all matching overrides and patches have
 been composed, which is useful when debugging module ordering.
+
+## Local Development
+
+Dynamic TGUI has its own Bun package so the AST patch tests can run from a
+fresh checkout without relying on a nearby host repo's `tgui/node_modules`.
+
+```bash
+bun install
+bun test
+```
+
+The runtime wrapper still prefers the host tgui package dependencies when used
+inside a real downstream build.
