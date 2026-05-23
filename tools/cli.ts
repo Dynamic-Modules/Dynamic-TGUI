@@ -1,13 +1,17 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+import { getDynamicTguiPaths } from '../paths';
 
 const [, , command, ...args] = Bun.argv;
 
 switch (command) {
 	case 'analyze':
-		run(['rspack', '--analyze', '--config', pathFromCli('../rspack.config.ts')]);
+		run([rspackBin(), '--analyze', '--config', pathFromCli('../rspack.config.ts')]);
 		break;
 	case 'build':
-		run(['rspack', 'build', '--config', pathFromCli('../rspack.config.ts')]);
+		run([rspackBin(), 'build', '--config', pathFromCli('../rspack.config.ts')]);
 		break;
 	case 'compare':
 		runTool('../compare.ts', args);
@@ -62,4 +66,16 @@ function run(cmd: string[]) {
 
 function pathFromCli(relativePath: string) {
 	return fileURLToPath(new URL(relativePath, import.meta.url));
+}
+
+function rspackBin() {
+	const { tguiRoot } = getDynamicTguiPaths();
+	const binaryName = process.platform === 'win32' ? 'rspack.cmd' : 'rspack';
+	const localBin = path.join(tguiRoot, 'node_modules', '.bin', binaryName);
+
+	if (fs.existsSync(localBin)) {
+		return localBin;
+	}
+
+	return 'rspack';
 }
