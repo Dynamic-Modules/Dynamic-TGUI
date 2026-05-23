@@ -1,0 +1,18 @@
+id = "dynamic-tgui"
+name = "Dynamic TGUI"
+version = "1.0.0"
+module_api = "1"
+description = "Rspack overlay support for Dynamic SS13 Modules that need to patch or replace tgui source at build time."
+
+[source]
+repo = "https://github.com/Dynamic-Modules/Dynamic-TGUI.git"
+default_branch = "main"
+
+[compat]
+target = "tgstation"
+minimum_dynamic_modules = "0.2.0"
+
+[build]
+dm_files = []
+test_files = []
+tgui = []
