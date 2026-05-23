@@ -19,6 +19,6 @@ tgui = []
 
 [[prepare_plugins]]
 id = "dynamic-tgui-cli-wrapper"
-command = "bun"
-args = ["prepare_plugin.ts"]
+command = "python3"
+args = ["prepare_plugin.py"]
 description = "Generates the host tgui package wrapper used by local builds, CI, and TGS."

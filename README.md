@@ -32,9 +32,11 @@ Point the host `tgui/package.json` scripts at that generated wrapper:
 
 The wrapper sets the host/index environment and dispatches to this module's
 Rspack config. The framework only runs the generic prepare plugin API here;
-Dynamic TGUI owns the wrapper path and generation details. If no modules
-declare tgui overlays, the Rspack plugin returns no extra patches and the
-normal tgui build proceeds.
+Dynamic TGUI owns the wrapper path and generation details. The prepare plugin
+uses only Python's standard library so host `prepare` remains lightweight before
+the tgui build installs or checks JavaScript tooling. If no modules declare
+tgui overlays, the Rspack plugin returns no extra patches and the normal tgui
+build proceeds.
 
 ## Module Manifests
 
